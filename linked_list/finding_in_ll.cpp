@@ -1,73 +1,43 @@
-#include <algorithm>
-#include <bits/stdc++.h>
-#include <climits>
-#include <cstdlib>
 #include <iostream>
-#include <vector>
-#define ll long long
 using namespace std;
 
 struct Node {
-public:
-     int data;
-     Node *next;
-
-     Node(int data1, Node *next1) {
-          data = data1;
-          next = next1;
-     }
-
-     ~Node(){
-          int value = this ->data;
-          if(this->next!=NULL){
-               delete next;
-               this->next = NULL;
-          }
-          cout<<" Memory is cleared of data"<<value<<endl;
-     }
+    int data;
+    Node* next;
+    Node(int val) : data(val), next(nullptr) {}
 };
 
-Node *covertArr(vector<int> &arr) {
-     Node *head = new Node(arr[0], nullptr);
-     Node *mover = head;
-     for (int i = 1; i < arr.size(); i++) {
-          Node *temp = new Node(arr[i], nullptr);
-          mover->next = temp;
-          mover = temp;
-     }
-     return head;
-}
-
-void deleteNode(int position,Node* &head){
-     if(position == 1){
-          Node *temp = head;
-          head = head ->next;
-          temp ->next = NULL;
-          delete temp;
-     }
-     else{
-          Node* curr = head;
-          Node* prev = NULL;
-          
-          int cnt = 1;
-          while (cnt<position) {
-               prev = curr;
-               curr = curr ->next;
-               cnt++;
-          }
-          prev ->next = curr ->next;
-          curr ->next = NULL;
-          delete curr;
-     }
+bool search(Node* head, int key) {
+    Node* current = head;
+    while (current != nullptr) {
+        if (current->data == key) {
+            return true;
+        }
+        current = current->next;
+    }
+    return false;
 }
 
 int main() {
-     vector<int> arr = {2, 5, 8, 7};
-     Node *head = covertArr(arr);
-     Node *tail = covertArr(arr);
-     Node *temp = head;
-     while (temp) {
-          cout << temp->data << " ";
-          temp = temp->next;
-     }
+
+    Node* head = new Node(1);
+    head->next = new Node(2);
+    head->next->next = new Node(3);
+    head->next->next->next = new Node(4);
+
+    int key = 3;
+    if (search(head, key)) {
+        cout << key << " found in the list." << endl;
+    } else {
+        cout << key << " not found." << endl;
+    }
+
+    Node* current = head;
+    while (current != nullptr) {
+        Node* temp = current;
+        current = current->next;
+        delete temp;
+    }
+
+    return 0;
 }

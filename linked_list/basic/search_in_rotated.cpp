@@ -14,13 +14,12 @@ public:
           int low = 0, high = nums.size() - 1;
 
         while (low <= high) {
-            int mid = low + (high - low) / 2;  // Prevents potential overflow
+            int mid = low + (high - low) / 2;
 
             if (nums[mid] == target) {
                 return mid;
             }
 
-            // Check if the left half is sorted
             if (nums[low] <= nums[mid]) {
                 if (nums[low] <= target && target < nums[mid]) {
                     high = mid - 1;
@@ -28,7 +27,6 @@ public:
                     low = mid + 1;
                 }
             }
-            // Right half must be sorted
             else {
                 if (nums[mid] < target && target <= nums[high]) {
                     low = mid + 1;
@@ -38,6 +36,6 @@ public:
             }
         }
 
-        return -1;  // Target not found
+        return -1;
      }
 };

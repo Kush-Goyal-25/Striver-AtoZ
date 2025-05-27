@@ -10,24 +10,24 @@ using namespace std;
 
 class Solution {
 public:
-    string removeOuterParentheses(string s) {
-        string result;
-        int depth = 0;
+     string removeOuterParentheses(string s) {
+          string result;
+          int depth = 0;
 
-        for (char ch : s) {
-            if (ch == '(') {
-                depth++;
-                if (depth > 1) {
-                    result += ch;
-                }
-            } else if (ch == ')') {
-                depth--;
-                if (depth >= 1) {
-                    result += ch;
-                }
-            }
-        }
+          for (char ch : s) {
+               if (ch == '(') {
+                    depth++;
+                    if (depth > 1) {
+                         result += ch;
+                    }
+               } else if (ch == ')') {
+                    depth--;
+                    if (depth >= 1) {
+                         result += ch;
+                    }
+               }
+          }
 
-        return result;
-    }
+          return result;
+     }
 };
